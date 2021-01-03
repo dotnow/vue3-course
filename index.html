@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="container" id="app" v-cloak>
-      <div class="card">
+      <div class="card center">
         <h1>План по изучению Vue.js</h1>
 
         <div class="steps">
@@ -24,13 +24,13 @@
               <span @click="setActive(idx)">{{ idx + 1}}</span> {{ title }}
             </li>
           </ul>
-          <div class="steps-content">
-            {{ steps[activeIndex].text }}
-          </div>
+          <div class="steps-content">{{ stepText }}</div>
+
           <div v-if="!completed">
             <button class="btn" :disabled="prevDisabled" @click="prev">Назад</button>
-            <button class="btn primary" @click="nextOfFinish" v-text="nextOfFinishButtonText"></button>
+            <button class="btn primary" @click="nextOrFinish">{{ nextOrFinishButtonText }}</button>
           </div>
+          
           <button class="btn primary" v-else @click="reset">Начать заново</button>
         </div>
       </div>

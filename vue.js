@@ -2,7 +2,6 @@ const App = {
   data() {
     return {
       activeIndex: 0,
-      completed: false,
       steps: [
         { title: 'Основы', text: 'В блоке вы познакомитесь со всеми основами Vue.js на практике. На протяжении блока мы напишем реактивное приложение, в процессе разработки которого разберем вся базу фреймворка.' },
         { title: 'Компоненты', text: 'Один из самых важных блоков в курсе, где вы узнаете все о компонентах. В блоке мы напишем 2 разных приложения и создадим более 5 различных UI компонентов как в реальной разработке. Блок расскажет про абсолютно все составляющие, которые есть в компонентах: взаимодействие, slots, асинхронные и динамические компоненты и тонна примеров.' },
@@ -10,16 +9,6 @@ const App = {
         { title: 'Vuex', text: 'В блоке вы узнаете абсолютно все про Vuex. Вы узнаете как работать с данными, какие есть лучшие практики по их программированию и структурированию. Все на практике.' },
         { title: 'Composition', text: 'Одним из наиболее важных обновлений в Vue 3 является появление альтернативного синтаксиса Composition API. В этом блоке вы узнаете все, чтобы полностью пользоваться данными синтаксисом на практических примерах. Помимо этого вы узнаете как работать совместно с Vue Router и Vuex.' },
       ]
-    }
-  },
-
-  watch: {
-    activeIndex: {
-      handler(value) {
-        if (value < this.steps.length) {
-          this.completed = false
-        }
-      }
     }
   },
 
@@ -35,12 +24,8 @@ const App = {
     },
 
     // кнопка вперёд или закончить
-    nextOfFinish() {
-      if (!this.isLastStep) {
+    nextOrFinish() {
         this.activeIndex++
-      } else {
-        this.completed = true
-      }
     },
 
     // когда нажимаем на определенный шаг
@@ -50,11 +35,19 @@ const App = {
   },
 
   computed: {
+    stepText() {
+      return this.completed ? this.steps[this.steps.length - 1].text : this.steps[this.activeIndex].text
+    },
+
     isLastStep() {
       return this.activeIndex === this.steps.length - 1
     },
 
-    nextOfFinishButtonText() {
+    completed() {
+      return this.activeIndex === this.steps.length
+    },
+
+    nextOrFinishButtonText() {
       return this.isLastStep ? 'Закончить' : 'Вперёд'
     },
 
