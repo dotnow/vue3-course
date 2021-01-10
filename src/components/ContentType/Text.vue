@@ -1,5 +1,14 @@
 <template>
-  <p>
-    <slot></slot>
-  </p>
+  <p><slot></slot>{{ value }}</p>
 </template>
+<script>
+
+export default {
+  props: {
+    value: {
+      type: String,
+      required: true
+    }
+  }
+}
+</script>

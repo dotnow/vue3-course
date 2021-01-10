@@ -1,6 +1,7 @@
 <template>
+  <slot></slot>
   <div class="avatar">
-    <img :src="value">
+    <img :src="value" alt="Avatar">
   </div>
 </template>
 
@@ -9,7 +10,14 @@ export default {
   props: {
     value: {
       type: String,
-      required: true
+      required: true,
+      validator (url) {
+        try {
+          return !!new URL(url)
+        } catch (e) {
+          return false
+        }
+      }
     }
   }
 }
