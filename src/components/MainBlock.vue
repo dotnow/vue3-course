@@ -40,8 +40,24 @@ export default {
 
   methods: {
     onAddRow (row) {
-      this.content.push(row)
+      const body = JSON.stringify(row)
+
+      fetch('https://vue-course-9bd3f-default-rtdb.firebaseio.com/blocks.json', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body
+      })
+        .then(async response => {
+          const { name } = await response.json()
+          this.content.push({ id: name, ...JSON.parse(body) })
+        })
+        .catch(e => {
+          console.log(e.message)
+        })
     },
+
     onRemoveRow (id) {
       fetch(`https://vue-course-9bd3f-default-rtdb.firebaseio.com/blocks/${id}.json`, {
         method: 'DELETE',

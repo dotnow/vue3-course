@@ -31,7 +31,7 @@ export default {
 
   .avatar img {
     width: 150px;
-    height: auto;
+    max-height: 150px;
     border-radius: 50%;
   }
 </style>

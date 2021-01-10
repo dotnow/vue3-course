@@ -53,25 +53,9 @@ export default {
       if (this.isBtnDisabled) {
         return
       }
-
-      const body = JSON.stringify(this.form)
-
-      fetch('https://vue-course-9bd3f-default-rtdb.firebaseio.com/blocks.json', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body
-      })
-        .then(async response => {
-          const { name } = await response.json()
-          this.$emit('onAddRow', { id: name, ...JSON.parse(body) })
-          this.form.blockType = 'title'
-          this.form.value = ''
-        })
-        .catch(e => {
-          console.log(e.message)
-        })
+      this.$emit('onAddRow', this.form)
+      this.form.blockType = 'title'
+      this.form.value = ''
     }
   }
 }
