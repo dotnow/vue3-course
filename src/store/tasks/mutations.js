@@ -1,8 +1,6 @@
 export default {
     SET_TASKS: (state, payload) => state.all = payload,
 
-    // SET_STATUS: (state, payload) => state.all.find(s => s.id === payload.id).status = payload.status,
-
     SET_LOADING_STATE: (state, payload) => state.loading = !!payload,
 
     SET_CURRENT_STATUS: (state, payload) => state.currentStatus = payload,
@@ -14,7 +12,6 @@ export default {
 
         if (index !== -1) {
             state.all[index] = JSON.parse(JSON.stringify(payload))
-            console.log(state.all[index]);
         }
 
     },
