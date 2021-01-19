@@ -62,7 +62,6 @@ export default {
 		const changeStatus = async status => {
 			task.value.status = status
 			await store.dispatch('tasks/updateTask', unref(task))
-			router.push({ name: 'tasks' })
 		}
 
 		const removeTask = async () => {

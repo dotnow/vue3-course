@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, toRefs } from 'vue'
 import { useStore } from 'vuex'
 
 export default {
@@ -15,13 +15,12 @@ export default {
 	},
 
 	setup(props) {
+		const { status } = toRefs(props)
 		const store = useStore()
 		const statusList = computed(() => store.getters['tasks/statusList'])
-		const label = statusList.value.find(s => s.name === (props.status ?? 'active'))
+		const label = computed(() => statusList.value.find(s => s.name === (status.value ?? 'active')))
 
-		return { 
-			label
-		}
+		return { label }
 	}
 }
 </script>

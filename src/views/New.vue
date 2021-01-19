@@ -49,11 +49,13 @@ export default {
 				return
 			}
 
+			const dateValue = new Date(date.value)
+
 			await store.dispatch('tasks/newTask', {
 				title: unref(title),
-				status: 'active',
+				status: dateValue < new Date() - 86400000 ? 'canceled' : 'active',
 				description: unref(description),
-				date: new Date(date.value)
+				date: dateValue
 			})
 
 			router.push({ name: 'tasks' })

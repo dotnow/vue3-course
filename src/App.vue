@@ -24,11 +24,13 @@
 
 <script>
 import { useStore } from 'vuex'
+import { onMounted } from 'vue'
 import NavLink from '@/components/NavLink'
 
 export default {
 	setup() {
-		useStore().dispatch('tasks/fetchAll')
+		onMounted(() => (useStore().dispatch('tasks/fetchAll')))
+		
 		return { }
 	},
 
