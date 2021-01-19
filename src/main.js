@@ -1,5 +1,15 @@
 import { createApp } from 'vue'
-import App from './App.vue'
-import './assets/theme.css'
+import App from '@/App.vue'
+import router from '@/router'
+import store from '@/store'
 
-createApp(App).mount('#app')
+import UIkit from 'uikit'
+import Icons from 'uikit/dist/js/uikit-icons'
+import 'uikit/dist/css/uikit.min.css'
+
+UIkit.use(Icons)
+
+createApp(App)
+    .use(router)
+    .use(store)
+    .mount('#app')
