@@ -37,12 +37,14 @@ import { useRouter } from 'vue-router'
 
 export default {
 	setup() {
+		const msDay = 86400000 // Сутки в милисекундах
 		const store = useStore()
 		const router = useRouter()
 		const title = ref('')
 		const description = ref('')
 		const date = ref(new Date().toISOString().split('T')[0])
 		const isDisabled = computed(() => (title.value.length < 3 || description.value.length < 5 || !date.value.length))
+		const isBefore = computed(() => new Date(date.value) < new Date() - msDay)
 
 		const onSubmit = async () => {
 			if (isDisabled.value) {
@@ -53,7 +55,7 @@ export default {
 
 			await store.dispatch('tasks/newTask', {
 				title: unref(title),
-				status: dateValue < new Date() - 86400000 ? 'canceled' : 'active',
+				status: isBefore.value ? 'canceled' : 'active',
 				description: unref(description),
 				date: dateValue
 			})

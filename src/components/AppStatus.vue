@@ -3,22 +3,15 @@
 </template>
 
 <script>
-import { computed, toRefs } from 'vue'
-import { useStore } from 'vuex'
+import { computed, inject, toRefs } from 'vue'
 
 export default {
-	props: {
-		status: {
-			type: String,
-			default: 'active'
-		}
-	},
+	props: ['status'],
 
 	setup(props) {
 		const { status } = toRefs(props)
-		const store = useStore()
-		const statusList = computed(() => store.getters['tasks/statusList'])
-		const label = computed(() => statusList.value.find(s => s.name === (status.value ?? 'active')))
+		const statusList = inject('statusList')
+		const label = computed(() => statusList.find(s => s.name === (status.value ?? 'active')))
 
 		return { label }
 	}

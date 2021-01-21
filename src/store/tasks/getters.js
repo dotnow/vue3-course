@@ -1,8 +1,6 @@
 export default {
     loading: state => state.loading,
 
-    statusList: state => state.statusList,
-
     currentStatus: state => state.currentStatus,
 
     all: state => state.all,

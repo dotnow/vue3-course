@@ -24,13 +24,22 @@
 
 <script>
 import { useStore } from 'vuex'
-import { onMounted } from 'vue'
+import { onMounted, provide } from 'vue'
 import NavLink from '@/components/NavLink'
 
 export default {
 	setup() {
+		const statusList = [
+			{ name: 'active', className: 'uk-label-success', title: 'Активна' },
+			{ name: 'pending', className: 'uk-label-warning', title: 'В работе' },
+			{ name: 'canceled', className: 'uk-label-danger', title: 'Отмена' },
+			{ name: 'done', className: 'uk-button-primary', title: 'Выполнена' }
+		]
+
+		provide('statusList', statusList)
+
 		onMounted(() => (useStore().dispatch('tasks/fetchAll')))
-		
+
 		return { }
 	},
 

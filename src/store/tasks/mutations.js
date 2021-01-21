@@ -3,7 +3,7 @@ export default {
 
     SET_LOADING_STATE: (state, payload) => state.loading = !!payload,
 
-    SET_CURRENT_STATUS: (state, payload) => state.currentStatus = payload,
+    SET_FILTER: (state, payload) => state.currentStatus = payload,
 
     ADD_TASK: (state, payload) => state.all.unshift(payload),
 
