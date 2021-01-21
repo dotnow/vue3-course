@@ -19,8 +19,8 @@ export const getAll = async () => {
 
     await fetch(`https://vue-course-9bd3f-default-rtdb.firebaseio.com/tasks.json`, requestOptions)
         .then(response => response.json())
-        .then(data => (tasks = data))
-        .catch(error => (sendError(`Ошибка: ${error.message}`)))
+        .then(data => tasks = data)
+        .catch(error => sendError(`Ошибка: ${error.message}`))
 
     return tasks
 }
@@ -41,7 +41,7 @@ export const addOrUpdate = async payload => {
     await fetch(`https://vue-course-9bd3f-default-rtdb.firebaseio.com/tasks/${payload.id}.json`, requestOptions)
         .then(response => response.json())
         .then(() => sendMessage(`Задача успешно ${id ? 'обновлена' : 'создана'}`))
-        .catch(error => (sendError(`Ошибка: ${error.message}`)))
+        .catch(error => sendError(`Ошибка: ${error.message}`))
 
     return payload
 }
@@ -54,6 +54,6 @@ export const remove = async id => {
 
     await fetch(`https://vue-course-9bd3f-default-rtdb.firebaseio.com/tasks/${id}.json`, requestOptions)
         .then(response => response.json())
-        .then(() => (sendMessage('Задача успешно удалена')))
-        .catch(error => (sendError(`Ошибка: ${error.message}`)))
+        .then(() => sendMessage('Задача успешно удалена'))
+        .catch(error => sendError(`Ошибка: ${error.message}`))
 }

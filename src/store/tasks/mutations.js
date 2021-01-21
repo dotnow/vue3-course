@@ -11,9 +11,8 @@ export default {
         const index = state.all.findIndex(t => t.id === payload.id)
 
         if (index !== -1) {
-            state.all[index] = JSON.parse(JSON.stringify(payload))
+            state.all[index] = payload
         }
-
     },
 
     REMOVE_TASK: (state, payload) => state.all = state.all.filter(t => t.id !== payload)
